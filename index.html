@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaniah Edwards | Lead Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #000000;
+    --ink-mid: #141414;
+    --accent: #7FA876;
+    --accent-dark: #3D5C39;
+    --accent-light: #EDF1E9;
+    --cream: #FAF8F2;
+    --warm-white: #FAF8F2;
+    --sage-bg: #EDF1E9;
+    --sage-border: #DCE3D5;
+    --text: #1A1A1A;
+    --muted: #6B6B6B;
+    --border: #E5DFC9;
+    --white: #FFFFFF;
+    --tag-bg: #EDF1E9;
+    --hero-bg: #4A5C3D;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(74,92,61,0.97);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--warm-white);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--hero-bg);
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+    background-image:
+      linear-gradient(rgba(250,248,242,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(250,248,242,0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(250,248,242,0.18);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    border: 1px solid rgba(250,248,242,0.12);
+  }
+
+  .axis-tick {
+    position: absolute;
+    font-family: 'DM Sans', monospace;
+    font-size: 0.68rem;
+    color: rgba(250,248,242,0.3);
+    letter-spacing: 0.05em;
+  }
+  .axis-tick.t1 { top: 2.2rem; left: 4rem; }
+  .axis-tick.t2 { bottom: 2rem; left: 4rem; }
+  .axis-tick.t3 { top: 2.2rem; right: 4rem; }
+
+  .corner-coord {
+    position: absolute;
+    bottom: 1.75rem;
+    right: 4rem;
+    font-family: 'DM Sans', monospace;
+    font-size: 0.7rem;
+    color: rgba(250,248,242,0.35);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--white);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 .accent { color: var(--white); }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--warm-white);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--warm-white);
+    color: var(--accent-dark);
+    padding: 0.8rem 1.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.88rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(250,248,242,0.4);
+    color: var(--warm-white);
+    padding: 0.8rem 1.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.88rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--warm-white); color: var(--white); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: rgba(250,248,242,0.1);
+    border: 1px solid rgba(250,248,242,0.18);
+    border-radius: 4px;
+    padding: 1.75rem 1.5rem;
+    position: relative;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0.9rem;
+    right: 0.9rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--white);
+    opacity: 0.4;
+  }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--warm-white);
+    line-height: 1.4;
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent-dark);
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: var(--ink);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-section {
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-section::before {
+    content: '';
+    position: absolute;
+    top: -15%;
+    right: -8%;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid var(--sage-border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .skill-category {
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+
+  .skill-cat-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--ink-mid);
+    font-size: 0.78rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+
+  /* EXPERIENCE */
+  .experience-section { background: var(--sage-bg); }
+
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-meta {
+    padding-top: 0.25rem;
+  }
+
+  .exp-dates {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-location {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.93rem;
+    color: var(--text);
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .exp-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* PROJECTS */
+  .projects-section {
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .projects-section::after {
+    content: '';
+    position: absolute;
+    bottom: -18%;
+    right: -6%;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    border: 1px solid var(--sage-border);
+  }
+  .projects-section h2 { color: var(--text); }
+  .projects-section .section-label { color: var(--accent-dark); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--sage-border);
+    border: 1px solid var(--sage-border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card {
+    background: var(--cream);
+    padding: 2rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .project-card:hover {
+    background: var(--white);
+  }
+
+  .project-image {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid var(--sage-border);
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .project-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    color: var(--accent-dark);
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.86rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    color: var(--accent-dark);
+    border: 1px solid var(--sage-border);
+    background: var(--white);
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-link {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 1px solid var(--accent-dark);
+    padding-bottom: 0.1rem;
+    transition: opacity 0.2s;
+  }
+
+  .project-link:hover { opacity: 0.65; }
+
+  .project-link svg {
+    width: 13px;
+    height: 13px;
+    fill: none;
+    stroke: var(--accent-dark);
+    stroke-width: 2;
+  }
+
+  /* EDUCATION */
+  .education-section { background: var(--cream); }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .edu-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .edu-school {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.85rem;
+  }
+
+  .edu-detail {
+    font-size: 0.82rem;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .edu-detail span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .gpa-badge {
+    background: var(--accent-light);
+    color: var(--ink-mid);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* CERTIFICATIONS */
+  .certs-section { background: var(--sage-bg); }
+
+  .certs-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cert-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-light);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cert-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .cert-name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .cert-issuer {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+
+  /* RESEARCH */
+  .research-section { background: var(--sage-bg); }
+
+  .research-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .research-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .research-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .research-desc {
+    font-size: 0.93rem;
+    color: var(--text);
+    line-height: 1.75;
+    max-width: 600px;
+  }
+
+  .research-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .research-year {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .research-school {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--hero-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -8%;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    border: 1px solid rgba(250,248,242,0.14);
+  }
+
+  .contact-section::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: 4%;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 1px solid rgba(250,248,242,0.1);
+  }
+  .contact-section h2 { color: var(--white); }
+  .contact-section .section-label { color: var(--white); }
+  .contact-section .section-label::before { background: var(--white); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-text {
+    font-size: 1.05rem;
+    color: var(--warm-white);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    color: var(--warm-white);
+    font-size: 0.93rem;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--white); }
+
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(250,248,242,0.25);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-link-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--hero-bg);
+    border-top: 1px solid rgba(250,248,242,0.18);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--warm-white);
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--white);
+    opacity: 0.75;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-inner > * {
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .hero-inner > *:nth-child(2) { animation-delay: 0.15s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-inner, .about-grid, .contact-grid, .edu-grid, .research-card {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">SE</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <span class="axis-tick t1">FIG. 01 / ANALYST PROFILE</span>
+  <span class="axis-tick t2">TAMPA, FL / 2026</span>
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Lead Data Analyst</p>
+      <h1>Shaniah<br><span class="accent">Edwards</span></h1>
+      <p class="hero-desc">I build the analytics infrastructure that makes better decisions possible. From financial models and automated pipelines to relational databases and compliance systems, I engineer solutions that didn't exist before.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Work</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+        <a href="Edwards_Shaniah_Resume.docx" download class="btn-outline">Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Production systems built from scratch</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3yr</div>
+        <div class="stat-label">Regulatory accreditation secured solo</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.0</div>
+        <div class="stat-label">MBA GPA, Business Analytics</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">28mo</div>
+        <div class="stat-label">P&amp;L actuals powering investor models</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-inner">
+    <p class="section-label">About</p>
+    <h2>Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Lead Data Analyst and analytics engineer based in Tampa, FL, with an MBA in Business Analytics (4.0 GPA) and a track record of <strong>building production infrastructure with what the organization already has</strong>, rather than buying new tools or outsourcing it.</p>
+        <p>As the sole analytics resource at Ryze Renal Care, I designed and built the organization's entire data infrastructure from the ground up, including a 400+ SKU inventory management system with FIFO costing across three companies, a connected procure-to-pay automation suite spanning four files and 29 VBA modules, Power Query pipelines that clean QuickBooks exports for financial reporting, a VBA-based intercompany loan reconciliation system, 2 Power Automate apps, and a Flask-based internal documentation and revenue cycle portal. None of it was outsourced. None of it existed before I built it.</p>
+        <p>My work spans finance, accounting, billing, clinical operations, scheduling, administration, and inventory management simultaneously. I prepare the organization's annual Medicare cost report, working directly from the general ledger to reconcile depreciation schedules, amortization, leasehold capitalization, and intercompany loan balances with the accounting team before submission, alongside monthly QAPI clinical compliance reports and investor-facing analytics presentations. I also write SQL and Python, run NLP analyses in R, and maintain Power BI dashboards.</p>
+        <p>What I'm genuinely good at is <strong>walking into a system that doesn't exist yet and building it end to end</strong>, from schema design and API integration to the dashboard a decision-maker actually uses.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <p class="skill-cat-label">Programming</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">R</span>
+            <span class="tag">Excel VBA</span>
+            <span class="tag">Microsoft Access</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <p class="skill-cat-label">APIs &amp; Integration</p>
+          <div class="tags">
+            <span class="tag">REST APIs</span>
+            <span class="tag">Odoo API</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <p class="skill-cat-label">Visualization &amp; BI</p>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">Excel Dashboards</span>
+            <span class="tag">ggplot2</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <p class="skill-cat-label">Automation</p>
+          <div class="tags">
+            <span class="tag">Power Automate</span>
+            <span class="tag">Power Apps</span>
+            <span class="tag">Power Query</span>
+            <span class="tag">SharePoint</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <p class="skill-cat-label">Analytics</p>
+          <div class="tags">
+            <span class="tag">Financial Modeling</span>
+            <span class="tag">Pro Forma</span>
+            <span class="tag">Forecasting</span>
+            <span class="tag">NLP / Sentiment</span>
+            <span class="tag">KPI Development</span>
+            <span class="tag">Revenue Cycle Analytics</span>
+            <span class="tag">Window Functions</span>
+            <span class="tag">Variance Analysis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience-section" id="experience">
+  <div class="section-inner">
+    <p class="section-label">Experience</p>
+    <h2>Where I've Worked</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <p class="exp-dates">Jun 2025 to Present</p>
+          <p class="exp-company">Ryze Renal Care</p>
+          <p class="exp-location">Tampa, FL</p>
+        </div>
+        <div>
+          <p class="exp-title">Lead Data Analyst</p>
+          <ul class="exp-bullets">
+            <li>Served as the sole analytics and process engineering resource across finance, accounting, billing, clinical operations, scheduling, administration, and inventory management, all simultaneously, with no IT department and no external vendor support.</li>
+            <li>Designed and built a 400+ SKU inventory and procure-to-pay automation suite in Excel VBA spanning five connected files and three companies at a shared warehouse location, with FIFO lot costing, dynamic multi-step user forms, cycle count scheduling, bundle usage variance detection, auto-generated purchase requisitions, a finance approval workflow with audit logging, vendor PO generation by company, and an AP reconciliation staging pipeline, 29 VBA modules in total.</li>
+            <li>Developed 5 Power Query pipelines, 2 Power Automate applications, an Odoo API integration, and a VBA-based intercompany loan reconciliation system, vendor-equivalent analytics infrastructure at zero vendor cost.</li>
+            <li>Built investor-facing financial pro forma model anchored to 28 months of audited P&amp;L actuals with formula-driven projections through 2027, scenario analysis, and a full assumptions tab as sole input layer.</li>
+            <li>Prepared the organization's annual Medicare cost report, reconciling depreciation schedules, amortization, leasehold capitalization, and intercompany loan balances against the general ledger before submission.</li>
+            <li>Produced monthly QAPI clinical compliance reports covering anemia management and dialysis adequacy metrics for regulatory submission.</li>
+            <li>Owned end-to-end regulatory compliance audit data preparation, securing a 3-year accreditation renewal with zero external consultant support.</li>
+            <li>Designed a Microsoft Access relational database linking personnel, payroll, and operational data, enabling cross-departmental reporting not previously possible.</li>
+            <li>Built and maintained Power BI financial dashboards used in executive and investor reporting.</li>
+            <li>Built a Flask-based revenue cycle documentation portal as a modular monolith covering Billing, AR, and AP, with all SOPs, flowcharts, trackers, and KPIs served from a single JSON content file, designed deliberately with no database and no PHI exposure.</li>
+            <li>Supported a two-entity merger through financial analysis, operational documentation, and cross-entity process alignment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <p class="exp-dates">Aug 2023 to May 2025</p>
+          <p class="exp-company">Midwestern State University</p>
+          <p class="exp-location">Wichita Falls, TX</p>
+        </div>
+        <div>
+          <p class="exp-title">Graduate Assistant</p>
+          <ul class="exp-bullets">
+            <li>Performed statistical analysis on institutional datasets to support academic reporting and data-driven recommendations for senior leadership.</li>
+            <li>Built structured analytical spreadsheets from raw data, improving reporting accuracy and workflow efficiency across administrative teams.</li>
+            <li>Managed confidential institutional data in compliance with data governance standards.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-inner">
+    <p class="section-label">Work</p>
+    <h2>Key Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <p class="project-num">01</p>
+        <p class="project-name">Inventory &amp; Procure-to-Pay Automation Suite</p>
+        <img src="texaflo_control_panel.png" alt="Texaflo Roasting Co. Inventory Control Panel with Record Inflow, Record Outflow, and Bundle Outflow buttons" class="project-image">
+        <p class="project-desc">Connected Excel VBA system spanning five files and one shared warehouse operation across three fictional companies, covering the full cycle from stock tracking to vendor payment. This portfolio demo recreates the system at 90 SKUs. The inventory side handles FIFO lot costing, multi-step user forms, cycle count scheduling, and bundle usage variance detection comparing expected production usage against actual dispensed quantities net of returns, feeding a Power Pivot data model and a live KPI dashboard with stock reconciliation and reorder tracking. The procurement side auto-generates purchase requisitions from low-stock triggers with duplicate checking, routes them through a finance approval workflow with audit logging, generates vendor POs per company, and reconciles against AP through a staging pipeline. 25 VBA modules drive the inventory system, 4 drive purchase requisitioning, and 2 Power Query pipelines reconcile AP, zero manual handoffs across the full chain.</p>
+        <img src="texaflo_dashboard.png" alt="Texaflo Roasting Co. Inventory dashboard showing stock value trends, movement charts, reorder status, and bundle usage variance" class="project-image">
+        <div class="project-links">
+          <a href="https://github.com/shaniahe2002-cyber/tricurrent-inventory-procure-to-pay" target="_blank" class="project-link">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0018 5.77 5.07 5.07 0 0017.91 1S16.73.65 14 2.48a13.38 13.38 0 00-7 0C4.27.65 3.09 1 3.09 1A5.07 5.07 0 003 5.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 007 19.13V23"/></svg>
+            View Code on GitHub
+          </a>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Excel VBA</span>
+          <span class="project-tag">Power Pivot</span>
+          <span class="project-tag">Power Query</span>
+          <span class="project-tag">FIFO Costing</span>
+          <span class="project-tag">Variance Analysis</span>
+          <span class="project-tag">AP Reconciliation</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-num">02</p>
+        <p class="project-name">App Store Sentiment Analysis: Anthropic vs OpenAI</p>
+        <img src="01_polarity_distribution.png" alt="Sentiment polarity distribution by brand: Claude 46.3% negative, ChatGPT 31.6% negative" class="project-image">
+        <p class="project-desc">Real NLP analysis of 980 US App Store reviews collected via the itunesr R package. Applied AFINN lexicon scoring, NRC emotion classification, TF-IDF weighting, and bigram analysis. Key finding: Claude reviews are 46.3% negative driven by usage limit frustration, versus 31.6% for ChatGPT. Delivered as an R Markdown report and a Shiny-style interactive dashboard.</p>
+        <div class="project-links">
+          <a href="https://github.com/shaniahe2002-cyber/sentiment-analysis-anthropic-openai" target="_blank" class="project-link">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0018 5.77 5.07 5.07 0 0017.91 1S16.73.65 14 2.48a13.38 13.38 0 00-7 0C4.27.65 3.09 1 3.09 1A5.07 5.07 0 003 5.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 007 19.13V23"/></svg>
+            View Code on GitHub
+          </a>
+          <a href="https://github.com/shaniahe2002-cyber/sentiment-analysis-anthropic-openai/blob/main/Shaniah_Edwards_OpenAI_Anthropic_Sentiment_Analysis_Report.pdf" target="_blank" class="project-link">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+            View Full Report (PDF)
+          </a>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">R</span>
+          <span class="project-tag">tidytext</span>
+          <span class="project-tag">NLP</span>
+          <span class="project-tag">ggplot2</span>
+          <span class="project-tag">Real Data</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-num">03</p>
+        <p class="project-name">Revenue Cycle SQL Analysis: Cath Health Group</p>
+        <img src="ar_aging_distribution.png" alt="AR aging distribution by specialty, showing Behavioral Health with the highest share of claims aged over 120 days" class="project-image">
+        <img src="denial_rate_by_specialty_payer.png" alt="Denial rate by specialty and payer, showing Behavioral Health and Medicaid combinations with the highest denial rates" class="project-image">
+        <p class="project-desc">Structured SQL analysis of 800 claims across four service lines for a fictional multi-specialty clinic. Twelve queries covering CTEs, window functions, AR aging buckets, running totals, denial rate trend analysis, and a provider scorecard with three simultaneous RANK() rankings. Built on direct revenue cycle experience restructuring billing operations in a clinical environment.</p>
+        <div class="project-links">
+          <a href="https://github.com/shaniahe2002-cyber/cath-health-revenue-cycle" target="_blank" class="project-link">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0018 5.77 5.07 5.07 0 0017.91 1S16.73.65 14 2.48a13.38 13.38 0 00-7 0C4.27.65 3.09 1 3.09 1A5.07 5.07 0 003 5.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 007 19.13V23"/></svg>
+            View Code on GitHub
+          </a>
+          <a href="https://github.com/shaniahe2002-cyber/cath-health-revenue-cycle/blob/main/Shaniah_Edwards_Cath_Health_Revenue_Cycle_Report.pdf" target="_blank" class="project-link">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+            View Full Report (PDF)
+          </a>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">SQLite</span>
+          <span class="project-tag">Window Functions</span>
+          <span class="project-tag">Revenue Cycle</span>
+          <span class="project-tag">CTEs</span>
+        </div>
+      </div>
+
+
+      <div class="project-card">
+        <p class="project-num">04</p>
+        <p class="project-name">Multi-Entity Financial Reporting Automation</p>
+        <p class="project-desc">Power Query pipeline that ingests QuickBooks-exported income statement and accounts receivable staging files, scrubs Excel error values, reshapes wide month columns into clean year-over-year P&amp;L and cash-basis views, and auto-derives report line labels through custom text parsing rather than manual relabeling. Paired with a separate VBA-based intercompany loan reconciliation system that fuzzy-matches transactions across five affiliated entities by date, amount, and counterparty text, nets the results into payer and beneficiary summaries, and produces a full exception report for anything that cannot be auto-matched.</p>
+        <div class="project-tags">
+          <span class="project-tag">Power Query</span>
+          <span class="project-tag">QuickBooks Data Cleaning</span>
+          <span class="project-tag">Excel VBA</span>
+          <span class="project-tag">Intercompany Reconciliation</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-num">05</p>
+        <p class="project-name">QAPI Clinical Compliance Reporting Pipeline</p>
+        <p class="project-desc">Monthly automated reporting system producing structured clinical reports covering anemia management and dialysis adequacy metrics for regulatory submission. Outputs decision-ready documentation for leadership and accreditation review.</p>
+        <div class="project-tags">
+          <span class="project-tag">Excel</span>
+          <span class="project-tag">Power Query</span>
+          <span class="project-tag">Clinical Analytics</span>
+          <span class="project-tag">Regulatory Reporting</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-num">06</p>
+        <p class="project-name">Digital Operations Platform</p>
+        <p class="project-desc">Rebuilt staff task management and opening workflows across multiple departments using Power Apps, Power Automate, and SharePoint, replacing static paper checklists with dynamic, trackable digital processes accessible from any device.</p>
+        <div class="project-tags">
+          <span class="project-tag">Power Apps</span>
+          <span class="project-tag">Power Automate</span>
+          <span class="project-tag">SharePoint</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-num">07</p>
+        <p class="project-name">Scheduling and Payroll Operations Database</p>
+        <p class="project-desc">Relational Microsoft Access database linking personnel records, shift scheduling, and payroll data, enabling cross-departmental reporting and scheduling automation not previously possible from siloed spreadsheets.</p>
+        <div class="project-tags">
+          <span class="project-tag">Microsoft Access</span>
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">Data Modeling</span>
+          <span class="project-tag">Process Automation</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-num">08</p>
+        <p class="project-name">Revenue Cycle Documentation Portal</p>
+        <p class="project-desc">Server-rendered Flask application built as a single modular monolith covering three functional areas, Billing, AR, and AP, under one Accounting umbrella, mirroring the organization's revenue cycle structure rather than splitting into three separate codebases. All content, an SOP library, eight process flowcharts, tracker and matrix references, a KPI dashboard, and the compliance spine, lives in one JSON file with zero database and zero authentication by design, since the portal holds only documentation, blank templates, and de-identified aggregate KPIs, deliberately keeping it outside HIPAA's PHI scope rather than building a security layer the use case does not need. Deploys to Render, Railway, Fly, or Replit out of the box.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Flask</span>
+          <span class="project-tag">Jinja2</span>
+          <span class="project-tag">JSON-Driven Content</span>
+          <span class="project-tag">Compliance Architecture</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-num">09</p>
+        <p class="project-name">Anemia Protocol to Inventory Bridge: Cath Health Group</p>
+        <p class="project-desc">Excel VBA system that converts monthly dialysis lab results into clinical anemia management recommendations, then rolls those recommendations into a medication-quantity forecast inventory can act on directly. Nested formula logic classifies each patient into an iron status and ESA dosing tier against protocol thresholds, automatically flagging mismatched or borderline labs for provider review rather than auto-prescribing. A three-tier PDF export separates the draft nurse review, the finalized clinical recommendations, and a clean inventory-only medication report, so the inventory team never sees raw lab data, only the doses they need to stock.</p>
+        <div class="project-tags">
+          <span class="project-tag">Excel VBA</span>
+          <span class="project-tag">Clinical Protocol Logic</span>
+          <span class="project-tag">PDF Automation</span>
+          <span class="project-tag">Inventory Forecasting</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="research-section" id="research">
+  <div class="section-inner">
+    <p class="section-label">Research</p>
+    <h2>Honors Thesis</h2>
+    <div class="research-card">
+      <div>
+        <p class="research-label">Hult International Business School</p>
+        <p class="research-title">The Impact of ShotSpotter Technology on Gun Crime and Community-Police Relations Across Racial Demographics in Chicago</p>
+        <p class="research-desc">Explored whether AI-powered gunshot detection technology produced a statistically significant impact on crime levels and community-police relations across different racial groups in Chicago. Integrated public crime datasets, demographic data, and deployment records to evaluate the technology's differential effects. Findings contributed to the broader conversation on algorithmic tools in public safety and equitable policy design.</p>
+      </div>
+      <div class="research-meta">
+        <p class="research-year">2023</p>
+        <p class="research-school">Hult International Business School<br>Boston, MA</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education-section" id="education">
+  <div class="section-inner">
+    <p class="section-label">Education</p>
+    <h2>Academic Background</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <p class="edu-degree">MBA in Business Analytics</p>
+        <p class="edu-school">Midwestern State University , Wichita Falls, TX</p>
+        <div class="edu-detail">
+          <span>Graduated 2025</span>
+          <span><span class="gpa-badge">GPA 4.0 / 4.0</span></span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <p class="edu-degree">BBA in Business Analytics, with Distinction</p>
+        <p class="edu-school">Hult International Business School , Boston, MA</p>
+        <div class="edu-detail">
+          <span>Graduated 2023 &middot; Hult Scholar</span>
+          <span><span class="gpa-badge">GPA 3.85 / 4.0</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs-section" id="certifications">
+  <div class="section-inner">
+    <p class="section-label">Credentials</p>
+    <h2>Certifications</h2>
+    <div class="certs-list">
+      <div class="cert-item">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M8 14l-3 7 7-3 7 3-3-7"/></svg>
+        </div>
+        <div>
+          <p class="cert-name">Google Business Intelligence Professional Certificate</p>
+          <p class="cert-issuer">Google via Coursera</p>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <p class="cert-name">Microsoft Office Specialist in Excel Associate</p>
+          <p class="cert-issuer">Microsoft</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <h2>Get In Touch</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-text">I'm always open to new opportunities, interesting problems, and conversations about data, analytics, and building things that matter.</p>
+        <div class="hero-ctas">
+          <a href="mailto:shaniahe2002@gmail.com" class="btn-primary">Send an Email</a>
+          <a href="Edwards_Shaniah_Resume.docx" download class="btn-outline">Download Resume</a>
+        </div>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:shaniahe2002@gmail.com" class="contact-link">
+          <span class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          </span>
+          shaniahe2002@gmail.com
+        </a>
+        <a href="tel:6172015705" class="contact-link">
+          <span class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>
+          </span>
+          (617) 201-5705
+        </a>
+        <a href="https://www.linkedin.com/in/shaniahedwards2002/" target="_blank" class="contact-link">
+          <span class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M11 10v7M11 13a3 3 0 016 0v4"/></svg>
+          </span>
+          linkedin.com/in/shaniahedwards2002
+        </a>
+        <a href="Edwards_Shaniah_Resume.docx" download class="contact-link">
+          <span class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </span>
+          Edwards_Shaniah_Resume.docx
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">2025 Shaniah Edwards. Tampa, FL.</span>
+  <span class="footer-logo">SE</span>
+</footer>
+
+</body>
+</html>
